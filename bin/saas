@@ -1,0 +1,53 @@
+#!/bin/bash
+# Sleep As A Service - Automatically put your laptop back to sleep if the lid is closed.
+# Use-case: Sleep has already been triggered and successful on your laptop. Soomething wakes it, like the laptop getting squashed a little causing a keypress. When you ome back to your bag, it's hot and the laptop's battering is flat.
+
+# NOTE Can be run in userspace. Ie no need for root.
+
+function once
+{
+    if [ "`getState`" == "closed" ]; then
+        echo "Closed"
+        doSleep
+    else
+        echo "Not closed."
+    fi
+}
+
+function doLoop
+{
+    interval=${1:-60}
+    
+    once
+    while sleep $interval; do
+        once
+    done
+}
+
+
+
+function getState
+{
+    acpiFile="/proc/acpi/button/lid/LID0/state"
+    if [ -f "$acpiFile" ]; then
+        sed 's/state: *//g' "$acpiFile"
+    fi
+}
+
+function doSleep
+{
+    systemctl suspend
+}
+
+
+
+
+case $1 in
+    "once") # Run once, right now.
+        once
+    ;;
+    "loop") # Run in a continous loop. Optionally specify an interval in the number of seconds as a second parameter.
+        echo "This is intended for debugging only." >&2
+        doLoop $2
+    ;;
+esac
