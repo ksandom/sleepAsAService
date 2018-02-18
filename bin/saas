@@ -4,13 +4,23 @@
 
 # NOTE Can be run in userspace. Ie no need for root.
 
+# Closed messages. Have fun!
+#MSG-closed Oh shit! I'm supposed to be sleeping. Going back to bed.
+#MSG-closed YIKES! Don't look, I was taking a shower.
+#MSG-closed No, I have a bigger dinosaurzzzzzzzz.
+#MSG-closed I had a bad dream. I dreamt that I was in a bag and it was all dark.
+#MSG-closed Dear sir! You pushed my buttons.
+#MSG-closed Screw you, I'm going back to sleep.
+#MSG-closed Screw you guys, I'm going home.
+
+
 function once
 {
     if [ "`getState`" == "closed" ]; then
-        echo "Closed"
+        echo "`date` `getSillyMessage MSG-closed` (Should have been sleeping. Going to try that again.)"
         doSleep
-    else
-        echo "Not closed."
+    # else
+        # No need to output anything at the moment.
     fi
 }
 
@@ -39,6 +49,22 @@ function doSleep
     systemctl suspend
 }
 
+function getSillyMessage
+{
+    key="$1"
+    grep "^#$key " $0 | # Get the messages from withing the file.
+        cut -d\  -f 2- | # Remove the search at the beginning.
+        sort -R | # Sort randomly.
+        head -n 1 # Choose the first one.
+}
+
+function testMessages
+{
+    for key in MSG-closed; do
+        echo "$key: `getSillyMessage $key`"
+    done
+}
+
 
 
 
@@ -49,5 +75,8 @@ case $1 in
     "loop") # Run in a continous loop. Optionally specify an interval in the number of seconds as a second parameter.
         echo "This is intended for debugging only." >&2
         doLoop $2
+    ;;
+    "testMessages")
+        testMessages
     ;;
 esac
