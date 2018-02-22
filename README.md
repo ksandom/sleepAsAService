@@ -24,12 +24,12 @@ Note that the `*/2` is specifying that the check will be run every 2 minutes. Yo
 
 ## Systemd
 
-TODO Write this.
+* TODO Write this.
 
 ## SysV
 
-TODO Make the code compatible.
-TODO Write this.
+* TODO Make the code compatible.
+* TODO Write this.
 
 
 ## KDE Specific
