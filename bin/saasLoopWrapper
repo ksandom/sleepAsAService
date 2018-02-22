@@ -1,0 +1,6 @@
+#!/bin/bash
+# The sole purpose of this script is to run the saas script in its own loop. For normal usage, use saas.
+
+logFile=/tmp/saas.log
+
+~/bin/saas loop > "$logFile"

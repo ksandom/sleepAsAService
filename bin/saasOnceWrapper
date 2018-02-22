@@ -1,0 +1,4 @@
+#!/bin/bash
+# The sole purpose of this script is to run the saas script once. For normal usage, use saas.
+
+~/bin/saas once
