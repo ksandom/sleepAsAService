@@ -1,0 +1,6 @@
+[Unit]
+Description=SleepAsAService
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/saas loop
