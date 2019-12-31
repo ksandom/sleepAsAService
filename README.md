@@ -4,7 +4,14 @@ Sleep As A Service - Automatically put your laptop back to sleep if the lid is c
 
 # Use-case
 
-Sleep has already been triggered and successful on your laptop. Soomething wakes it, like the laptop getting squashed a little causing a keypress. When you ome back to your bag, it's hot and the laptop's battering is flat.
+Sleep has already been triggered and successful on your laptop. Something wakes it, like
+
+* the laptop getting squashed a little causing a keypress.
+* the laptop wanting the OS to put it into hibernate.
+
+When you come back to your bag, it's hot and the laptop's battering is flat.
+
+Right now, the only action is to go back to sleep. But I intend to make hibernating an option in a future release.
 
 # Using it
 
